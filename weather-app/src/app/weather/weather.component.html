@@ -1,0 +1,42 @@
+<div class="weather">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <h2 class="text-center mb-4">Weather Information System</h2>
+        <app-input (cityChanged)="onCityChanged($event)"></app-input>
+        <app-button (onClick)="getWeather()"></app-button>
+        <div *ngIf="loading" class="dim-overlay">
+          <div class="loader"></div>
+        </div>
+        <div *ngIf="!loading">
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="weatherData && !errorMessage" class="mt-4">
+            <h4>Weather Information:</h4>
+            <img [src]="'../../assets/images/clear.png'" class="weather-icon" />
+            <p><strong>Condition:</strong> {{ weatherData.condition.text }}</p>
+            <p>
+              <strong>Temperature:</strong> {{ weatherData.temp_f }}°F /
+              {{ weatherData.temp_c }}°C
+            </p>
+            <div class="details">
+              <div class="col">
+                <img src="../../assets/images/humidity.png" />
+                <div class="mt-2">
+                  <p><strong>Humidity:</strong> {{ weatherData.humidity }}%</p>
+                </div>
+              </div>
+              <div class="col">
+                <div>
+                  <img src="../../assets/images/wind.png" />
+                </div>
+                <p><strong>Wind:</strong> {{ weatherData.wind_kph }}kph</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
